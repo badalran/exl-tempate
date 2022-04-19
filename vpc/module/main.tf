@@ -5,12 +5,21 @@ module "vpc" {
   cidr = var.vpc_cidr
 
   azs             = data.aws_availability_zones.available.names
-  private_subnets = var.private_subnets
-  public_subnets  = var.public_subnets
 
   enable_nat_gateway = var.enable_nat_gateway
   enable_vpn_gateway = var.enable_vpn_gateway
 
+}
+  
+resource "aws_subnet" "private_subnet" {
+  count = "${var.subnet_count}"
+  vpc_id            = module.vpc.vpc_id
+  cidr_block        = "10.0.${count.index}.0/26"
+  availability_zone = "${element(data.aws_availability_zones.all.names, count.index)}"
+
+  tags {
+    Name = "${var.vpc_name}-${element(var.availability_zone, count.index)}-${count.index}"
+  }
 }
 
 resource "aws_default_security_group" "default" {
