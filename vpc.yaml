@@ -37,7 +37,9 @@ inputs:
     type: list
     description: List of private subnets to create within the VPC
     display_label: Private Subnets
-    default: 
+    default: 2
+    constraints:
+      - valid_values:
         - 1
         - 2
         - 3
