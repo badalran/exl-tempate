@@ -4,7 +4,7 @@ module "vpc" {
   name = var.vpc_name
   cidr = var.vpc_cidr
 
-  azs             = data.aws_availability_zones.available.names
+  azs             = [data.aws_availability_zones.available.names[0], data.aws_availability_zones.available.names[1]]
 
   enable_nat_gateway = var.enable_nat_gateway
   enable_vpn_gateway = var.enable_vpn_gateway
@@ -18,7 +18,7 @@ resource "aws_subnet" "private_subnet" {
   availability_zone = data.aws_availability_zones.available.names[count.index % 2]
 
   tags = {
-   Name = "${var.vpc_name}-${element(data.aws_availability_zones.available.names, count.index)}-net${count.index + 1}"
+   Name = "${var.vpc_name}-data.aws_availability_zones.available.names[count.index % 2]-net0${count.index + 1}"
   }
 }
 
