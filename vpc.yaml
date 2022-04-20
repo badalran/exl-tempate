@@ -75,6 +75,7 @@ node_templates:
           subnet_count: { get_input: subnet_count }
           enable_nat_gateway: { get_input: enable_nat_gateway }
           enable_vpn_gateway: { get_input: enable_vpn_gateway }
+          route_table_id: { get_attribute: [ vpc, outputs, default_route_table_id, value ] }
     relationships:
       - target: terraform
         type: cloudify.terraform.relationships.run_on_host
