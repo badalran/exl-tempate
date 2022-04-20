@@ -5,7 +5,7 @@ output "vpc_id" {
 
 output "subnet_ids" {
   description = "IDs of created subnets"
-  value       = aws_subnet.subnets.*.id
+  value       = aws_subnet.private_subnet.*.id
 }
 
 output "default_route_table_id" {
