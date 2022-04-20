@@ -33,8 +33,3 @@ variable "subnet_count" {
   description = "Whether or not to enable a VPN gateway"
   default     = 4
 }
-
-variable "route_table_id" {
-  type        = string
-  description = "ID of the route table to associate subnets with"
-}
