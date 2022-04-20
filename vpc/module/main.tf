@@ -48,8 +48,8 @@ resource "aws_default_security_group" "default" {
   }
 }
 
-resource "aws_route_table_association" "a" {
-  count = "${var.subnet_count}"
-  subnet_id      = element(aws_subnet.private_subnet.*.id, count.index)
-  route_table_id = "${aws_vpc.vpc.default_route_table_id}"
-}
+#resource "aws_route_table_association" "a" {
+#  count = "${var.subnet_count}"
+#  subnet_id      = element(aws_subnet.private_subnet.*.id, count.index)
+#  route_table_id = "${aws_vpc.vpc.default_route_table_id}"
+#}
