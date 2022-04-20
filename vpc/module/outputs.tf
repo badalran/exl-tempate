@@ -3,12 +3,12 @@ output "vpc_id" {
   value       = module.vpc.vpc_id
 }
 
-output "private_subnets" {
-  description = "Private subnet IDs"
-  value       = module.vpc.private_subnets
+output "subnet_ids" {
+  description = "IDs of created subnets"
+  value       = aws_subnet.subnets.*.id
 }
 
-output "private_route_table_ids" {
-  description = "IDs of created private route tables"
-  value       = module.vpc.private_route_table_ids
+output "default_route_table_id" {
+  description = "ID of the default routing table for the VPC"
+  value       = module.vpc.default_route_table_id
 }
