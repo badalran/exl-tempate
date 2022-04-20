@@ -84,8 +84,8 @@ capabilities:
     value: { get_attributes_list: [ vpc, outputs, vpc_id, value ] }
 
   private_subnets:
-    value: { get_attributes_list: [ vpc, outputs, private_subnets, value ] }
+    value: { get_attributes_list: [ vpc, outputs, subnet_ids, value ] }
 
   private_route_tables:
-    value: { get_attributes_list: [ vpc, outputs, private_route_table_ids, value ] }
+    value: { get_attributes_list: [ vpc, outputs, default_route_table_id, value ] }
   
