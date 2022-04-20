@@ -15,7 +15,7 @@ resource "aws_subnet" "private_subnet" {
   count = "${var.subnet_count}"
   vpc_id            = module.vpc.vpc_id
   cidr_block        = "10.0.0.${count.index * 64}/26"
-  availability_zone = "${element(data.aws_availability_zones.available.names, count.index)}"
+  availability_zone = data.aws_availability_zones.available.names[count.index % 2]
 
   tags = {
    Name = "${var.vpc_name}-${element(data.aws_availability_zones.available.names, count.index)}-net${count.index + 1}"
@@ -51,5 +51,5 @@ resource "aws_default_security_group" "default" {
 resource "aws_route_table_association" "association" {
   count          = "${var.subnet_count}"
   subnet_id      = "${element(aws_subnet.private_subnet[*].id, count.index)}"
-  route_table_id = var.route_table_id
+  route_table_id = module.vpc.default_route_table_id
 }
