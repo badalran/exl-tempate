@@ -25,13 +25,11 @@ inputs:
     type: string
     description: Name of the VPC
     display_label: VPC Name
-    default: example-vpc
 
   vpc_cidr:
     type: string
     description: CIDR address for the VPC
     display_label: VPC CIDR
-    default: 10.0.0.0/16
 
   subnet_count:
     type: string
