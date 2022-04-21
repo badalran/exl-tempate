@@ -53,16 +53,6 @@ inputs:
     description: Whether or not to enable a VPN gateway
     display_label: Enable VPN Gateway
     default: false
-    
-  transit_gateway_id:
-    type: string
-    description: ID of the transit gateway to attach the VPC to
-    display_label: Transit Gateway ID
-
-  destination_cidr:
-    type: string
-    description: Destination CIDR address to route
-    display_label: Destination CIDR
 
 node_templates:
 
@@ -88,25 +78,6 @@ node_templates:
     relationships:
       - target: terraform
         type: cloudify.terraform.relationships.run_on_host
-        
-  tgw_attachment:
-    type: cloudify.nodes.terraform.Module
-    properties:
-      resource_config:
-        source:
-          location: tgw-attachment/module.zip
-        variables:
-          region: { get_input: region }
-          transit_gateway_id: { get_input: transit_gateway_id }
-          vpc_id: { get_attribute: [ vpc, outputs, vpc_id, value ] }
-          subnet_ids: { get_attribute: [ vpc, outputs, subnet_ids, value ] }
-          route_table_ids: { get_attribute: [ vpc, outputs, default_route_table_id, value ] }
-          destination_cidr: { get_input: destination_cidr }
-    relationships:
-      - target: terraform
-        type: cloudify.terraform.relationships.run_on_host
-      - target: vpc
-        type: cloudify.relationships.contained_in
 
 capabilities:
   vpc_id:
