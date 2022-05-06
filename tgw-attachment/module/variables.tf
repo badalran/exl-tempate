@@ -10,7 +10,7 @@ variable "subnet_ids" {
 }
 
 variable "route_table_ids" {
-  type        = list(string)
+  type        = string
   description = "List of route table IDs to create TGW route for"
 }
 
